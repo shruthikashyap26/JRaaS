@@ -18,18 +18,16 @@ block content
           | Login
         a.btn.btn-link(href='/forgot') Forgot your password?
       hr
-      a.btn.btn-block.btn-facebook.btn-social(href='/auth/facebook')
-        i.fa.fa-facebook
-        | Sign in with Facebook
-      a.btn.btn-block.btn-twitter.btn-social(href='/auth/twitter')
-        i.fa.fa-twitter
-        | Sign in with Twitter
-      a.btn.btn-block.btn-google-plus.btn-social(href='/auth/google')
-        i.fa.fa-google-plus
-        | Sign in with Google
-      a.btn.btn-block.btn-github.btn-social(href='/auth/github')
-        i.fa.fa-github
-        | Sign in with GitHub
-      a.btn.btn-block.btn-linkedin.btn-social(href='/auth/linkedin')
-        i.fa.fa-linkedin
-        | Sign in with LinkedIn
+      .col-sm-1.col-sm-offset-4
+        a.btn.btn-lg.btn-social-icon(href='/auth/github', title='Sign in with Github')
+          span.ion-social-github
+      .col-sm-1
+        a.btn.btn-lg.btn-social-icon(href='/auth/facebook', title='Sign in with Facebook')
+          span.ion-social-facebook
+      .col-sm-1  
+        a.btn.btn-lg.btn-social-icon(href='/auth/google', title='Sign in with Google+')
+          span.ion-social-googleplus
+      
+      .col-sm-1
+        a.btn.btn-lg.btn-social-icon(href='/auth/linkedin', title='Sign in with LinkedIn')
+          span.ion-social-linkedin

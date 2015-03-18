@@ -1,13 +1,13 @@
 extends layout
 
 head
-  link(type='text/javascript', href='/js/lib/raphael.js')
-  link(type='text/javascript', href='/js/lib/jquery.usmap.js')
+  link(type='text/javascript', src='/js/lib/raphael.js')
+  link(type='text/javascript', src='/js/lib/jquery.usmap.js')
 block content
   p.lead JRaaS eases the HR's efforts by cutting down the time to find the right candidate through a bank of resumes.
   hr
   .row
-    #map.col-sm-6.hidden-xs.map
+    #map
 script.
   $(document).ready(function() {
   $('#map').usmap({

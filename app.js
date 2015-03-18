@@ -56,7 +56,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(compress());
 app.use(connectAssets({
-  paths: [path.join(__dirname, 'public/css'), path.join(__dirname, 'public/js'), path.join(__dirname, 'public/fonts'), path.join(__dirname, 'public/svg')]
+  paths: [path.join(__dirname, 'public/css'), path.join(__dirname, 'public/js'), 
+  path.join(__dirname, 'public/fonts'), path.join(__dirname, 'public/svg')]
 }));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -119,6 +120,7 @@ app.get('/api/github', passportConf.isAuthenticated, passportConf.isAuthorized, 
 app.get('/api/twitter', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getTwitter);
 app.post('/api/twitter', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.postTwitter);
 app.get('/api/linkedin', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getLinkedin);
+
 
 /**
  * OAuth authentication routes. (Sign in)
