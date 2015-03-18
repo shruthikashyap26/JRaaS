@@ -1,0 +1,1 @@
+JRaaS stands for Job Recommendation as a Service. It aims at easing the HR personnel efforts by helping them find the right candidate through a bank of resumes using Data mining concepts.
