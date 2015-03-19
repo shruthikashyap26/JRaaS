@@ -7,7 +7,10 @@ html
     meta(name='csrf-token', content=_csrf)
     title #{title} - JRaaS
     != css('main')
+    script(src="/application.js")
+
   body
+ 
     include partials/navbar
 
     .container
@@ -15,5 +18,3 @@ html
       block content
 
     include partials/footer
-
-    != js('application')
