@@ -11,6 +11,7 @@ var errorHandler = require('errorhandler');
 var lusca = require('lusca');
 var methodOverride = require('method-override');
 var multer  = require('multer');
+var url = require('url');
 
 var _ = require('lodash');
 var MongoStore = require('connect-mongo')(session);
@@ -56,9 +57,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(compress());
 app.use(connectAssets({
-  paths: [path.join(__dirname, 'public/css'), path.join(__dirname, 'public/js'), 
+  paths: [path.join(__dirname, 'public/css'), 
   path.join(__dirname, 'public/fonts'), path.join(__dirname, 'public/svg')]
 }));
+app.use(express.static(path.join(__dirname,'public/js')))
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -94,6 +96,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
  * Primary app routes.
  */
 app.get('/', homeController.index);
+app.get('/job', homeController.job);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);

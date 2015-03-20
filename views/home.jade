@@ -1,19 +1,37 @@
 extends layout
 
 head
-  link(type='text/javascript', src='/js/lib/raphael.js')
-  link(type='text/javascript', src='/js/lib/jquery.usmap.js')
+
 block content
+
   p.lead JRaaS eases the HR's efforts by cutting down the time to find the right candidate through a bank of resumes.
+  script(src="/lib/jquery-2.1.3.min.js")
+  script(src="/lib/raphael.js")
+  script(src="/lib/jquery.usmap.js")
+    
+  script.
+    $(document).ready(function() {
+      $('#map').usmap({
+        stateHoverAnimation : 300,
+        stateHoverStyles : {
+        fill : 'red'
+        },
+        stateStyles : {
+        fill : 'blue'
+        },
+        showLabels : true,
+        mouseover : function(event,data){
+          $('#displayState')
+          .text(data.name);
+        },
+        click : function(evet,data){
+          window.location = '/job?state='+data.name;
+        }
+      });
+    });
+
   hr
   .row
     #map
-script.
-  $(document).ready(function() {
-  $('#map').usmap({
-  stateHoverAnimation : 300,
-  stateHoverStyles : {
-  fill : '#2C93FF'
-  }
-  });
-  });
+    #displayState
+    #stateClicked
