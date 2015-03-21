@@ -57,10 +57,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(compress());
 app.use(connectAssets({
-  paths: [path.join(__dirname, 'public/css'), 
+  paths: [path.join(__dirname, 'public/css'), path.join(__dirname, 'public/js'),
   path.join(__dirname, 'public/fonts'), path.join(__dirname, 'public/svg')]
 }));
-app.use(express.static(path.join(__dirname,'public/js')))
+//app.use(express.static(path.join(__dirname,'public/js')))
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
