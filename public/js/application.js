@@ -15,6 +15,12 @@
 
 //= require lib/jquery-2.1.3.min
 //= require lib/bootstrap.min
+<<<<<<< HEAD
 //= require lib/raphael
 //= require lib/jquery.usmap
 //= require main
+=======
+//= require main
+//= require lib/raphael.js
+//= require lib/jquery.usmap.js
+>>>>>>> dae8159d731edd073599c1ed316cd717d6fdcf75
