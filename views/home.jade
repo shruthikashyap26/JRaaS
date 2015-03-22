@@ -5,19 +5,16 @@ head
 block content
 
   p.lead JRaaS eases the HR's efforts by cutting down the time to find the right candidate through a bank of resumes.
-  script(src="/lib/jquery-2.1.3.min.js")
-  script(src="/lib/raphael.js")
-  script(src="/lib/jquery.usmap.js")
     
   script.
     $(document).ready(function() {
       $('#map').usmap({
         stateHoverAnimation : 300,
         stateHoverStyles : {
-        fill : 'red'
+        fill : '#2C93FF'
         },
         stateStyles : {
-        fill : 'blue'
+        fill : '#FFFFFF'
         },
         showLabels : true,
         mouseover : function(event,data){
@@ -32,6 +29,6 @@ block content
 
   hr
   .row
-    #map
+    #map.col-sm-6.hidden-xs.map
     #displayState
     #stateClicked
