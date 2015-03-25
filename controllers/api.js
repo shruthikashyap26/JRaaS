@@ -6,7 +6,7 @@ var async = require('async');
 var request = require('request');
 var graph = require('fbgraph');
 var Github = require('github-api');
-var Twit = require('twit');
+//var Twit = require('twit');
 var Linkedin = require('node-linkedin')(secrets.linkedin.clientID, secrets.linkedin.clientSecret, secrets.linkedin.callbackURL);
 var Y = require('yui/yql');
 var _ = require('lodash');
@@ -72,7 +72,7 @@ exports.getGithub = function(req, res, next) {
  * GET /api/twitter
  * Twiter API example.
  */
-exports.getTwitter = function(req, res, next) {
+/*exports.getTwitter = function(req, res, next) {
   var token = _.find(req.user.tokens, { kind: 'twitter' });
   var T = new Twit({
     consumer_key: secrets.twitter.consumerKey,
@@ -87,13 +87,13 @@ exports.getTwitter = function(req, res, next) {
       tweets: reply.statuses
     });
   });
-};
+};*/
 
 /**
  * POST /api/twitter
  * Post a tweet.
  */
-exports.postTwitter = function(req, res, next) {
+/*exports.postTwitter = function(req, res, next) {
   req.assert('tweet', 'Tweet cannot be empty.').notEmpty();
   var errors = req.validationErrors();
   if (errors) {
@@ -112,7 +112,7 @@ exports.postTwitter = function(req, res, next) {
     req.flash('success', { msg: 'Tweet has been posted.'});
     res.redirect('/api/twitter');
   });
-};
+};*/
 
 /**
  * GET /api/linkedin
