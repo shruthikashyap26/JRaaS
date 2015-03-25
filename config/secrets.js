@@ -27,34 +27,34 @@ module.exports = {
 
   mailgun: {
     user: process.env.MAILGUN_USER || 'postmaster@sandbox535179b61a1748bfb1cf956080cad851.mailgun.org',
-    password: process.env.MAILGUN_PASSWORD || ''
+    password: process.env.MAILGUN_PASSWORD || '37e301e17471adfa9b8a1a0c6ee15a3a'
   },
 
   facebook: {
-    clientID: process.env.FACEBOOK_ID || '754220301289665',
-    clientSecret: process.env.FACEBOOK_SECRET || '41860e58c256a3d7ad8267d3c1939a4a',
+    clientID: process.env.FACEBOOK_ID || '669400563172268',
+    clientSecret: process.env.FACEBOOK_SECRET || 'b200141eb7bb77bc578c0388f36b73f8',
     callbackURL: '/auth/facebook/callback',
     passReqToCallback: true
   },
 
   github: {
-    clientID: process.env.GITHUB_ID || 'cb448b1d4f0c743a1e36',
-    clientSecret: process.env.GITHUB_SECRET || '815aa4606f476444691c5f1c16b9c70da6714dc6',
+    clientID: process.env.GITHUB_ID || 'f5e3203c3b4974a6d166',
+    clientSecret: process.env.GITHUB_SECRET || '5c190c056c503062f910994d5078264706546ca3',
     callbackURL: '/auth/github/callback',
     passReqToCallback: true
   },
 
   google: {
-    clientID: process.env.GOOGLE_ID || '828110519058.apps.googleusercontent.com',
-    clientSecret: process.env.GOOGLE_SECRET || 'JdZsIaWhUFIchmC1a_IZzOHb',
+    clientID: process.env.GOOGLE_ID || '840265510598-s0b06ps3aa4mvn1fkncqdhnjsrc4qq9p.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_SECRET || 'Mcsos16wPlV3mhQjDB83f02f',
     callbackURL: '/auth/google/callback',
     passReqToCallback: true
   },
 
   linkedin: {
-    clientID: process.env.LINKEDIN_ID || '77chexmowru601',
-    clientSecret: process.env.LINKEDIN_SECRET || 'szdC8lN2s2SuMSy8',
-    callbackURL: process.env.LINKEDIN_CALLBACK_URL || 'http://localhost:3000/auth/linkedin/callback',
+    clientID: process.env.LINKEDIN_ID || '78mttjus7iltv4',
+    clientSecret: process.env.LINKEDIN_SECRET || 'OtrDPWi4fAIUW0tO',
+    callbackURL: process.env.LINKEDIN_CALLBACK_URL || 'http://jraas.elasticbeanstalk.com/auth/linkedin/callback',
     scope: ['r_fullprofile', 'r_emailaddress', 'r_network'],
     passReqToCallback: true
   }
