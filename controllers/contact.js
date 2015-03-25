@@ -37,7 +37,7 @@ exports.postContact = function(req, res) {
   var to = req.body.email;
   var name = req.body.name;
   var body = req.body.message;
-  var from = 'jraasinc@gmail.com';
+  var from = 'admin@jraasinc.com';
   var subject = 'You\'ve got a mail from JRaaS';
 
   var mailOptions = {
