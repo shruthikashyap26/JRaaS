@@ -34,11 +34,11 @@ exports.postContact = function(req, res) {
     return res.redirect('/contact');
   }
 
-  var from = req.body.email;
+  var to = req.body.email;
   var name = req.body.name;
   var body = req.body.message;
-  var to = 'your@email.com';
-  var subject = 'You\' got a mail from JRaaS';
+  var from = 'jraasinc@gmail.com';
+  var subject = 'You\'ve got a mail from JRaaS';
 
   var mailOptions = {
     to: to,
