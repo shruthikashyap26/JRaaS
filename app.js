@@ -29,6 +29,7 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
+var profileController = require('./controllers/profilesummary');
 
 /**
  * API keys and Passport configuration.
@@ -109,6 +110,13 @@ app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
+app.get('/profilesummary', profileController.getProfile);
+app.post('/profilesummary', profileController.postProfile);
+app.get('/workdetails', profileController.getWorkDetails);
+app.post('/workdetails', profileController.postWorkDetails);
+app.get('/edudetails', profileController.getEduDetails);
+app.post('/edudetails', profileController.postEduDetails);
+app.get('/extradetails', profileController.getExtraDetails);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);

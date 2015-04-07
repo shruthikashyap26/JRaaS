@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+	.page-header
+	h3 Linked Account
+	.col-sm-4
+	h4 Link your profile to get a boost in your job search
+		hr
+		.col-sm-1.col-sm-offset-4
+			a.btn.btn-lg.btn-social-icon(href='/auth/github', title='Sign in with Github')
+				span.ion-social-github
+		.col-sm-1
+			a.btn.btn-lg.btn-social-icon(href='/auth/facebook', title='Sign in with Facebook')
+				span.ion-social-facebook
+		.col-sm-1  
+			a.btn.btn-lg.btn-social-icon(href='/auth/google', title='Sign in with Google+')
+				span.ion-social-googleplus   
+		.col-sm-1
+			a.btn.btn-lg.btn-social-icon(href='/auth/linkedin', title='Sign in with LinkedIn')
+				span.ion-social-linkedin
+		

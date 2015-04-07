@@ -20,6 +20,28 @@ var userSchema = new mongoose.Schema({
     picture: { type: String, default: '' }
   },
 
+  profilesummary: {
+    title: {type: String, default:''},
+    specialization: {type: String, default:''},
+    skills: {type: String, default:''},
+    location: {type: String, default:''},
+    search: {type: String, default:''}
+  },
+
+  workdetails: {
+    company_name: {type: String, default:''},
+    job_title: {type: String, default:''},
+    role: {type: String, default:''}
+  },
+
+  edudetails: {
+    school: {type: String, default:''},
+    field:  {type: String, default:''},
+    degree: {type: String, default:''},
+    start_year: {type: String, default:''},
+    end_year: {type: String, default:''}
+  },
+  
   resetPasswordToken: String,
   resetPasswordExpires: Date
 });

@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+    .page-header
+      h3 Work History
+      .col-sm-2
+      h4 Please provide work history to complete your profile.
+    body
+      form.form-horizontal(id='profile' name='work' method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group
+            label(class='col-sm-2 control-label', for='company_name') Company
+            .col-sm-4
+              input.form-control(type='text', name='company_name', id='company_name', placeholder="Company Name")
+          .form-group
+            label(class='col-sm-2 control-label', for='job_title') Job Title
+            .col-sm-4
+              input.form-control(type='text', name='job_title', id='job_title', placeholder="Job Title")
+          .form-group
+            label(class='col-sm-2 control-label', for='role') Summary
+            .col-sm-4
+              input.form-control(type='text',name='role', id='role', placeholder="Elaborate on your contribution to different projects and role")
+
+          .form-group
+              .col-sm-offset-2.col-sm-4
+              button.btn.btn.btn-primary(type='submit')
+                span.ion-edit
+                | Next

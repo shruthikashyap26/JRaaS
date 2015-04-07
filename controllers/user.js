@@ -96,7 +96,7 @@ exports.postSignup = function(req, res, next) {
       if (err) return next(err);
       req.logIn(user, function(err) {
         if (err) return next(err);
-        res.redirect('/');
+        res.redirect('/profilesummary');
       });
     });
   });
@@ -111,6 +111,8 @@ exports.getAccount = function(req, res) {
     title: 'Account Management'
   });
 };
+
+
 
 /**
  * POST /account/profile
@@ -128,7 +130,7 @@ exports.postUpdateProfile = function(req, res, next) {
     user.save(function(err) {
       if (err) return next(err);
       req.flash('success', { msg: 'Profile information updated.' });
-      res.redirect('/account');
+      res.redirect('/Account');
     });
   });
 };
