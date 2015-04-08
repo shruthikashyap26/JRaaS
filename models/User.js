@@ -20,6 +20,15 @@ var userSchema = new mongoose.Schema({
     picture: { type: String, default: '' }
   },
 
+  company: {
+    name: { type: String, default: '' },
+    description: { type: String, default: '' },
+    website: { type: String, default: '' },
+    address: { type: String, default: '' },
+    phone: { type: String, default: '' },
+    contact_email: { type: String, default: '' }
+  },
+
   resetPasswordToken: String,
   resetPasswordExpires: Date
 });
