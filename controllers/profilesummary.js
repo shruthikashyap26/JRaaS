@@ -7,7 +7,7 @@ var secrets = require('../config/secrets');
  */
 exports.getProfile = function(req, res) {
   res.render('candidate/profilesummary', {
-    title: 'Profile'
+    title: 'Candidate Profile'
   });
 };
 /**

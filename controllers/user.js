@@ -84,7 +84,8 @@ exports.postSignup = function(req, res, next) {
 
   var user = new User({
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    whoareyou: req.body.whoareyou
   });
 
   User.findOne({ email: req.body.email }, function(err, existingUser) {
@@ -96,7 +97,10 @@ exports.postSignup = function(req, res, next) {
       if (err) return next(err);
       req.logIn(user, function(err) {
         if (err) return next(err);
-        res.redirect('/profilesummary');
+        if (user.whoareyou == 'candidate')
+          res.redirect('/profilesummary');
+        else if (user.whoareyou == 'company')
+          res.redirect('/job');
       });
     });
   });
