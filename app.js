@@ -30,6 +30,8 @@ var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
 var profileController = require('./controllers/profilesummary');
+var companyController = require('./controllers/company');
+var jobController = require('./controllers/job');
 
 /**
  * API keys and Passport configuration.
@@ -98,7 +100,6 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
  * Primary app routes.
  */
 app.get('/', homeController.index);
-app.get('/job', homeController.job);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
@@ -117,6 +118,10 @@ app.post('/workdetails', profileController.postWorkDetails);
 app.get('/edudetails', profileController.getEduDetails);
 app.post('/edudetails', profileController.postEduDetails);
 app.get('/extradetails', profileController.getExtraDetails);
+app.get('/company', companyController.getCompany);
+app.post('/company', companyController.postCompany);
+app.get('/job', jobController.getJob);
+app.post('/job', jobController.postJob);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
