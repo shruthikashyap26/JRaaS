@@ -5,57 +5,36 @@ block content
       h3 Work History
       .col-sm-2
       h4 Please provide work history to complete your profile.
-    body
-      .input_container
-        label(class='col-sm-2 control-label', for='company_name') Company :                              
-        textarea#company.add_input(name='company', rows='1', cols='40', placeholder="Company Name")
-        br
-        br
-        label(class='col-sm-2 control-label', for='job_title') Job Title :                              
-        textarea#job_title.add_input1(name='job_title', rows='1', cols='40', placeholder="Job Title")
-        br
-        br
-        label(class='col-sm-2 control-label', for='role') Summary :                              
-        textarea#role.add_input2(name='role', rows='4', cols='40', placeholder="Elaborate on your contribution to different projects and role")
-        br
-        br
-        input.add_button(type='button', value='Add')
-      input#showInput(type='button', value='Input Array')
-      #example
-        | Array:
       script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
       script.
-        bindInputs();
-        $("#showInput").click(getInputArray);
-        function bindInputs()
+        function CloneForm(formName) 
         {
-          $(".add_button").on("click", function()
-          {
-            var button = $(this);
-            var parent = button.parent();
-            parent.after(parent.clone());
-            bindInputs();
-          });
+          var formCount = document.forms.length;
+          var oForm = document.forms[formName];
+          var clone = oForm.cloneNode(true);
+          clone.name += "_" + formCount;
+          document.body.appendChild(clone);
         }
-        var inputValues = [];
+    body
+      form.form-horizontal(id='profile' name='work' method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group
+            label(class='col-sm-2 control-label', for='company_name') Company
+            .col-sm-4
+              input.form-control(type='text', name='company_name', id='company_name', placeholder="Company Name")
+          .form-group
+            label(class='col-sm-2 control-label', for='job_title') Job Title
+            .col-sm-4
+              input.form-control(type='text', name='job_title', id='job_title', placeholder="Job Title")
+          .form-group
+            label(class='col-sm-2 control-label', for='role') Summary
+            .col-sm-4
+              input.form-control(type='text',name='role', id='role', placeholder="Elaborate on your contribution to different projects and role")
+          .form-group
+            button#btnAddForm(type='button', onclick="CloneForm('work');") Add one more
 
-        function getInputArray()
-        {
-          var inputs = $(".add_input");
-          var input1 = $(".add_input1");
-          var input2 = $(".add_input2");
-          var exampleDIVHTML = "Input Array: <br/><br/> ";
-          for(var i = 0; i < inputs.length; i++)
-          {
-            var input = inputs[i];
-            var inputs1 = input1[i];
-            var inputss1 = input2[i];
-        
-            console.log(input.value);
-            inputValues[i] = "company_name:"+input.value +" "+"job_title:"+inputs1.value +" "+"role:"+inputss1.value;
-            exampleDIVHTML+="Input #"+i+": "+inputValues[i]+"<br/>";
-            //do rest of logic here.
-          }
-          $("#example").html(exampleDIVHTML);
-        }
-
+          .form-group
+              .col-sm-offset-2.col-sm-4
+              button.btn.btn.btn-primary(type='submit')
+                span.ion-edit
+                | Next
