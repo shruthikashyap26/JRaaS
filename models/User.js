@@ -29,9 +29,11 @@ var userSchema = new mongoose.Schema({
   },
 
   workdetails: {
-    company_name: {type: String, default:''},
-    job_title: {type: String, default:''},
-    role: {type: String, default:''}
+    work : [ {
+      company_name: {type: String, default:''},
+      job_title: {type: String, default:''},
+      role: {type: String, default:''} 
+    } ]
   },
 
   edudetails: {
