@@ -15,17 +15,17 @@ block content
         label.col-sm-2.control-label(for='specialization') Specialization
         .col-sm-4
           select#specialization(name='specialization')
-            option(value='Engineering Backend', selected='') Engineering Backend
+            option(value='Engineering Backend' selected) Engineering Backend
             option(value='Engineering Frontend') Engineering Frontend
             option(value='Engineering Devops') Engineering Devops
             option(value='Engineering Mobile') Engineering Mobile
             option(value='Engineering QA') Engineering QA
-            option(value='abc1') abc1
-            option(value='abc1') abc1
-            option(value='abc1') abc1
-            option(value='abc1') abc1
-            option(value='abc1') abc1
-            option(value='abc1') abc1
+            option(value='Engineering Full-stack') Engineering Full-stack
+            option(value='Product Management') Product Management
+            option(value='Project Management') Project Management
+            option(value='Business Development') Business Development
+            option(value='Marketing') Marketing
+            option(value='Sales') Sales
       .form-group
         label.col-sm-2.control-label(for='skills') Skills
         .col-sm-4
@@ -35,12 +35,12 @@ block content
         .col-sm-4
           input#location.form-control(type='text', name='location', rows='3', placeholder='enter your current location for optimal matching')
       .form-group
-      label.col-sm-2.control-label(for='search') Looking for 
-      .col-sm-4
-        label.radio
+        label.col-sm-2.control-label(for='search') Looking for 
+        .col-sm-4
+          label.radio
           input(type='radio', name='search', value='active', data-toggle='radio')
           span Active 
-        label.radio
+          label.radio
           input(type='radio', name='search', value='passive', data-toggle='radio')
           span Passive
       .form-group

@@ -17,8 +17,9 @@ exports.getProfile = function(req, res) {
 exports.postProfile = function(req, res) {
   User.findById(req.user.id, function(err, user) {
     if (err) return next(err);
+    console.log("value is" + req.body.specialization);
     user.profilesummary.title = req.body.title || '';
-    user.profilesummary.specialization = req.body.specialization.value || '';
+    user.profilesummary.specialization = req.body.specialization || '';
     user.profilesummary.skills = req.body.skills || '';
     user.profilesummary.location = req.body.location || '';
     user.profilesummary.search = req.body.search || '';
