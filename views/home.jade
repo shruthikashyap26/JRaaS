@@ -3,9 +3,9 @@ extends layout
 head
 
 block content
-
-  p.lead JRaaS eases the HR's efforts by cutting down the time to find the right candidate through a bank of resumes.
-    
+  if !user 
+    p.lead.col-sm-offset-3 Recruiting is Broken! Login and stop searching!
+    hr
   script.
     $(document).ready(function() {
       $('#map').usmap({
@@ -26,8 +26,6 @@ block content
         }
       });
     });
-
-  hr
   .row
     #map.col-sm-offset-2.col-sm-6.hidden-xs.map
     #stateClicked

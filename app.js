@@ -32,6 +32,7 @@ var contactController = require('./controllers/contact');
 var profileController = require('./controllers/profilesummary');
 var companyController = require('./controllers/company');
 var jobController = require('./controllers/job');
+var exploreController = require('./controllers/explore');
 
 /**
  * API keys and Passport configuration.
@@ -122,6 +123,7 @@ app.get('/company', companyController.getCompany);
 app.post('/company', companyController.postCompany);
 app.get('/job', jobController.getJob);
 app.post('/job', jobController.postJob);
+app.get('/explore', exploreController.explore);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);

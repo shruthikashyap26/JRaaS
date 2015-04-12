@@ -100,7 +100,7 @@ exports.postSignup = function(req, res, next) {
         if (user.whoareyou == 'candidate')
           res.redirect('/profilesummary');
         else if (user.whoareyou == 'company')
-          res.redirect('/job');
+          res.redirect('/company');
       });
     });
   });
