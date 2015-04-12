@@ -5,70 +5,46 @@ block content
     h3 Profile Details
     .col-sm-2
     h4 Please provide the below details to complete your profile.
-
-    form.form-horizontal(id='profile' method='POST')
-      input(type='hidden', name='_csrf', value=_csrf)
+    form#profile.form-horizontal(method='POST')
+      input(type='hidden', name='_csrf' value=_csrf)
       .form-group
-        label(class='col-sm-2 control-label', for='title') Title
+        label.col-sm-2.control-label(for='title') Title
         .col-sm-4
-          input.form-control(type='text', name='title', id='title' rows="3", placeholder="Developer, Intern, Sales Executive")
+          input#title.form-control(type='text', name='title', rows='3', placeholder='Developer, Intern, Sales Executive')
       .form-group
         label.col-sm-2.control-label(for='specialization') Specialization
         .col-sm-4
-            dt.a(href="#", data-toggle="dropdown").dropdown-toggle Select one
-            ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
-              li
-                a(href='#', tabindex='-1') Engineering Backend
-              li 
-              li
-                a(href='#', tabindex='-1') Engineering Frontend
-              li
-              li
-                a(href='#', tabindex='-1') Engineering Devops
-              li
-              li
-                a(href='#', tabindex='-1') Engineering Mobile
-               li
-              li
-                a(href='#', tabindex='-1') Engineering QA
-              li
-              li
-                a(href='#', tabindex='-1') Engineering Full-stack
-              li
-              li
-                a(href='#', tabindex='-1') Product Management
-              li
-              li
-                 a(href='#', tabindex='-1') Project Management
-              li
-              li
-                a(href='#', tabindex='-1') Business Development
-              li
-              li
-                a(href='#', tabindex='-1') Marketing
-              li
-              li
-                a(href='#', tabindex='-1') Sales
-              li
+          select#specialization(name='specialization')
+            option(value='Engineering Backend' selected) Engineering Backend
+            option(value='Engineering Frontend') Engineering Frontend
+            option(value='Engineering Devops') Engineering Devops
+            option(value='Engineering Mobile') Engineering Mobile
+            option(value='Engineering QA') Engineering QA
+            option(value='Engineering Full-stack') Engineering Full-stack
+            option(value='Product Management') Product Management
+            option(value='Project Management') Project Management
+            option(value='Business Development') Business Development
+            option(value='Marketing') Marketing
+            option(value='Sales') Sales
       .form-group
-        label(class='col-sm-2 control-label', for='skills') Skills
+        label.col-sm-2.control-label(for='skills') Skills
         .col-sm-4
-          input.form-control(type='text', name='skills', id='skills' rows="3", placeholder="enter relevant skills based on specialization")
+          input#skills.form-control(type='text', name='skills', rows='3', placeholder='enter relevant skills based on specialization')
       .form-group
-        label(class='col-sm-2 control-label', for='location') Location
+        label.col-sm-2.control-label(for='location') Location
         .col-sm-4
-          input.form-control(type='text', name='location', id='location' rows="3", placeholder="enter your current location for optimal matching")
+          input#location.form-control(type='text', name='location', rows='3', placeholder='enter your current location for optimal matching')
       .form-group
-      label.col-sm-2.control-label(for='search') Looking for 
-      .col-sm-4
-        label.radio
+        label.col-sm-2.control-label(for='search') Looking for 
+        .col-sm-4
+          label.radio
           input(type='radio', name='search', value='active', data-toggle='radio')
           span Active 
-        label.radio
+          label.radio
           input(type='radio', name='search', value='passive', data-toggle='radio')
           span Passive
       .form-group
-          .col-sm-offset-2.col-sm-4
-          button.btn.btn.btn-primary(type='submit')
-            span.ion-edit
-            | Next
+        .col-sm-offset-2.col-sm-4
+        button.btn.btn.btn-primary(type='submit')
+          span.ion-edit
+          | Next

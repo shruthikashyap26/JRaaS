@@ -5,36 +5,28 @@ block content
       h3 Work History
       .col-sm-2
       h4 Please provide work history to complete your profile.
-      script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
-      script.
-        function CloneForm(formName) 
-        {
-          var formCount = document.forms.length;
-          var oForm = document.forms[formName];
-          var clone = oForm.cloneNode(true);
-          clone.name += "_" + formCount;
-          document.body.appendChild(clone);
-        }
     body
-      form.form-horizontal(id='profile' name='work' method='POST')
-          input(type='hidden', name='_csrf', value=_csrf)
-          .form-group
-            label(class='col-sm-2 control-label', for='company_name') Company
-            .col-sm-4
-              input.form-control(type='text', name='company_name', id='company_name', placeholder="Company Name")
-          .form-group
-            label(class='col-sm-2 control-label', for='job_title') Job Title
-            .col-sm-4
-              input.form-control(type='text', name='job_title', id='job_title', placeholder="Job Title")
-          .form-group
-            label(class='col-sm-2 control-label', for='role') Summary
-            .col-sm-4
-              input.form-control(type='text',name='role', id='role', placeholder="Elaborate on your contribution to different projects and role")
-          .form-group
-            button#btnAddForm(type='button', onclick="CloneForm('work');") Add one more
+      form.form-horizontal(id='workdetails' method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .input_container
+          input.add_button(type = 'button' value = 'ADD Another work item' id = 'addButton')
+          input(id = 'workCount' type='hidden', name='workCount', value='1')
 
-          .form-group
-              .col-sm-offset-2.col-sm-4
-              button.btn.btn.btn-primary(type='submit')
-                span.ion-edit
-                | Next
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+        script.
+          var count = 1;
+          function appendHtml(){
+            $('.add_button').before('<label for="company_name" class="col-sm-2 control-label">Company :</label><textarea id="company" name="company_name" rows="1" cols="40" placeholder="Company Name" class="add_input"></textarea><br/><br/><label for="job_title" class="col-sm-2 control-label">Job Title :</label><textarea id="job_title" name="job_title" rows="1" cols="40" placeholder="Job Title" class="add_input1"></textarea><br/><br/><label for="role" class="col-sm-2 control-label">Summary : </label><textarea id="role" name="role" rows="4" cols="40" placeholder="Elaborate on your contribution to different projects and role" class="add_input2"></textarea><br/><br/>' ) ;
+          }
+          $(document).ready(appendHtml());
+          $("#addButton").on("click",function()
+          {
+            $('#workCount').val(++count);
+            appendHtml();
+          });
+
+        .form-group
+            .col-sm-offset-2.col-sm-4
+            button.btn.btn.btn-primary(type='submit')
+              span.ion-edit
+              | Next
