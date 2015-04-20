@@ -5,7 +5,7 @@ block content
     p.lead Let's see who's looking for you
     hr
     each job, index in jobs
-      .col-lg-12
+      .col-xs-8
         #accordion.panel-group
           #panel1.panel.panel-info
             .panel-heading
@@ -13,7 +13,7 @@ block content
                 a(
                   data-toggle='collapse',
                   data-target="#collapse#{index + 1}",
-                  href="#collapse#{index + 1}"
+                  href="/job/#{job.job_id}"
                 )
-                  p #{job.job_title}
+                  p #{job.job_title}, #{job.location}
                 div(id="#collapse#{index + 1}.panel-collapse.collapse.in")

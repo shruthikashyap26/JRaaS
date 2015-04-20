@@ -5,7 +5,9 @@ head
 block content
   if !user 
     p.lead.col-sm-offset-3 Recruiting is Broken! Login and stop searching!
-    hr
+  else 
+    p.lead.col-sm-offset-3 Check jobs to see your matches based on your profile
+  hr
   script.
     $(document).ready(function() {
       $('#map').usmap({
@@ -18,14 +20,169 @@ block content
         },
         showLabels : true,
         mouseover : function(event,data){
-          $('#displayState')
-          .text(data.name);
+          $('#displayState').text(data.name);
         },
         click : function(evet,data){
-          window.location = '/job?state='+data.name;
+          var stateName;
+          switch(data.name) {
+            case 'WA': 
+              stateName = 'Washington';
+              break;
+            case 'OR':
+              stateName = 'Oregon';
+              break;
+            case 'CA':
+              stateName = 'California';
+              break;
+            case 'ID':
+              stateName = 'Idaho';
+              break;
+            case 'NV':
+              stateName = 'Nevada';
+              break;
+            case 'AZ':
+              stateName = 'Arizona';
+              break;
+            case 'UT':
+              stateName = 'Utah';
+              break;
+            case 'MT':
+              stateName = 'Montana';
+              break;
+            case 'WY':
+              stateName = 'Wyoming';
+              break;
+            case 'CO':
+              stateName = 'Colorado';
+              break;
+            case 'ND':
+              stateName = 'North Dakota';
+              break;
+            case 'SD':
+              stateName = 'South Dakota';
+              break;
+            case 'NE':
+              stateName = 'Nebraska';
+              break;
+            case 'KS':
+              stateName = 'Kansas';
+              break;
+            case 'OK':
+              stateName = 'Oklahoma';
+              break;
+            case 'TX':
+              stateName = 'Texas';
+              break;
+            case 'LA':
+              stateName = 'Louisiana';
+              break;
+            case 'AR':
+              stateName = 'Arkansas';
+              break;
+            case 'MO':
+              stateName = 'Missouri';
+              break;
+            case 'IA':
+              stateName = 'Iowa';
+              break;
+            case 'MN':
+              stateName = 'Minnesota';
+              break;
+            case 'WI':
+              stateName = 'Wisconsin';
+              break;
+            case 'IL':
+              stateName = 'Illinois';
+              break;
+            case 'KY':
+              stateName = 'Kentucky';
+              break;
+            case 'TN':
+              stateName = 'Tennessee';
+              break;
+            case 'MS':
+              stateName = 'Mississippi';
+              break;
+            case 'AL':
+              stateName = 'Alabama';
+              break;
+            case 'FL':
+              stateName = 'Florida';
+              break;
+            case 'GA':
+              stateName = 'Georgia';
+              break;
+            case 'SC':
+              stateName = 'South Carolina';
+              break;
+            case 'NC':
+              stateName = 'North Carolina';
+              break;
+            case 'VA':
+              stateName = 'Virginia';
+              break;
+            case 'MI':
+              stateName = 'Michigan';
+              break;
+            case 'IN':
+              stateName = 'Indiana';
+              break;
+            case 'OH':
+              stateName = 'Ohio';
+              break;
+            case 'WV':
+              stateName = 'West Virginia';
+              break;
+            case 'MD':
+              stateName = 'Maryland';
+              break;
+            case 'PA':
+              stateName = 'Philadelphia';
+              break;
+            case 'NY':
+              stateName = 'New York';
+              break;
+            case 'VT':
+              stateName = 'Vermont';
+              break;
+            case 'NH':
+              stateName = 'New Hampshire';
+              break;
+            case 'ME':
+              stateName = 'Maine';
+              break;
+            case 'MA':
+              stateName = 'Massachusetts';
+              break;
+            case 'CT':
+              stateName = 'Connecticut';
+              break;
+            case 'RI':
+              stateName = 'Rhode Island';
+              break;
+            case 'DE':
+              stateName = 'Delaware';
+              break;
+            case 'NJ':
+              stateName = 'New Jersey';
+              break;
+            case 'DC':
+              stateName = 'District of Columbia';
+              break;
+            case 'AK':
+              stateName = 'Alaska';
+              break;
+            case 'HI':
+              stateName = 'Hawaii';
+              break;
+            default: 
+              stateName = "Not a recognized state";
+          }
+          window.location = '/explore?state=' + stateName;
         }
       });
     });
   .row
     #map.col-sm-offset-2.col-sm-6.hidden-xs.map
     #stateClicked
+    #displayState
