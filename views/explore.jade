@@ -4,16 +4,26 @@ block content
 
     p.lead Let's see who's looking for you
     hr
-    each job, index in jobs
+    each job in jobs
       .col-xs-8
         #accordion.panel-group
           #panel1.panel.panel-info
             .panel-heading
               h4.panel-title
-                a(
-                  data-toggle='collapse',
-                  data-target="#collapse#{index + 1}",
-                  href="/job/#{job.job_id}"
-                )
-                  p #{job.job_title}, #{job.location}
-                div(id="#collapse#{index + 1}.panel-collapse.collapse.in")
+                a(data-toggle='collapse', data-target='#collapse#{job.job_id}', href='#collapse#{job.job_id}')
+                  | #{job.job_title}, #{job.location}
+                  div(id="#fb-root")
+                  .fb-like(data-href='https://developers.facebook.com/docs/plugins/', data-layout='standard', data-action='recommend', data-show-faces='true', data-share='true')
+            |         
+            div(id="#collapse#{job.job_id}").panel-collapse.collapse.in
+              .panel-body
+                | #{job.description}
+          |     
+    script.
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId="+#{fb.clientID};
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
