@@ -13,7 +13,7 @@ block content
                 a(data-toggle='collapse', data-target='#collapse#{job.job_id}', href='#collapse#{job.job_id}')
                   | #{job.job_title}, #{job.location}
                   div(id="#fb-root")
-                  .fb-like(data-href='https://developers.facebook.com/docs/plugins/', data-layout='standard', data-action='recommend', data-show-faces='true', data-share='true')
+                  .fb-like(data-href='http://www.jraas.elasticbeanstalk.com/explore#collapse#{job.job_id}', data-layout='standard', data-action='recommend', data-show-faces='true', data-share='true')
             |         
             div(id="#collapse#{job.job_id}").panel-collapse.collapse.in
               .panel-body
