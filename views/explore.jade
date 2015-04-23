@@ -23,7 +23,7 @@ block content
                 a(data-toggle='collapse', data-target='#{job.job_id}', href='#collapse#{job.job_id}')
                   div(id="#fb-root")
                     |  #{job.job_title}, #{job.location}
-                    script(type='IN/Share', data-url='http://jraas.elasticbeanstalkexplore#collapse#{job.job_id}')
+                    script(type='IN/Share', data-url='http://jraas.elasticbeanstalk.com/explore#collapse#{job.job_id}')
                     .fb-share-button(style="padding-right: 3px; position: relative; float: right;" data-href='http://jraas.elasticbeanstalk.com/explore#collapse#{job.job_id}', data-layout='button')
             |         
             div(id="#collapse#{job.job_id}").panel-collapse.collapse.in
