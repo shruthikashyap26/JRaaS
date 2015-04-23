@@ -131,6 +131,11 @@ exports.postUpdateProfile = function(req, res, next) {
     user.profile.location = req.body.location || '';
     user.profile.website = req.body.website || '';
 
+    user.profilesummary.title = req.body.email || '';
+    user.profilesummary.skills = req.body.skiils || '';
+    user.profilesummary.specialization = req.body.specialization || '';
+    user.profilesummary.location = req.body.location || '';
+
     user.save(function(err) {
       if (err) return next(err);
       req.flash('success', { msg: 'Profile information updated.' });
