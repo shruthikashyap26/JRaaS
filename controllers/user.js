@@ -98,9 +98,9 @@ exports.postSignup = function(req, res, next) {
       req.logIn(user, function(err) {
         if (err) return next(err);
         if (user.whoareyou == 'candidate')
-          res.redirect('/profilesummary');
+          res.redirect('/explore');
         else if (user.whoareyou == 'company')
-          res.redirect('/company');
+          res.redirect('/explore');
       });
     });
   });
