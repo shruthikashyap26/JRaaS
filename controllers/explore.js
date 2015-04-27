@@ -10,7 +10,7 @@ exports.explore = function(req, res) {
 		stateName = "";
 	}
 
-	if (!req.user) {
+	//if (!req.user) {
 		Job.find({ location : new RegExp(stateName)}, function (err, joblist) {
 			res.render('explore', {
 				title : 'Find a job',
@@ -19,9 +19,9 @@ exports.explore = function(req, res) {
 				ln : secrets.linkedin
 			});
 		});
-	} else if (req.user.whoareyou == 'company') {
-		return res.redirect('/job');
-	} else {
-		return res.redirect('/profilesummary');
-	}
+	//} else if (req.user.whoareyou == 'company') {
+	//	return res.redirect('/job');
+	//} else {
+	//	return res.redirect('/profilesummary');
+	//}
 };
