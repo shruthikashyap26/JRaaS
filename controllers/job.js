@@ -1,19 +1,20 @@
 var secrets = require('../config/secrets');
 var Job = require('../models/Job');
+var User = require('../models/User');
 
 /**
  * GET /job
  * Job form page.s
  */
 exports.getJob = function(req, res) {
-  //if (req.body.whoareyou == 'company') {
+  if (req.user.whoareyou == 'company') {
     res.render('job', {
       title: 'Job'
     });
- // } else {
- //   req.flash('errors', {msg: 'You need to sign in as a company to post jobs.'});
- //   return res.redirect('/');
- // }
+  } else {
+    req.flash('errors', {msg: 'You need to sign in as a company to post jobs.'});
+    return res.redirect('/');
+  }
 };
 
 /**
@@ -21,7 +22,7 @@ exports.getJob = function(req, res) {
  * Create a new job.
  */
 exports.postJob = function(req, res, next) {
- // if (req.body.whoareyou == 'company') {
+  if (req.user.whoareyou == 'company') {
     req.assert('job_title', 'Job tittle cannot be blank').notEmpty();
     req.assert('job_id', 'Job ID is not valid').notEmpty();
     req.assert('skill_set', 'Skill is not valid').notEmpty();
@@ -40,7 +41,8 @@ exports.postJob = function(req, res, next) {
       job_id: req.body.job_id,
       skill_set: req.body.skill_set,
       location: req.body.location,
-      experience_level: req.body.experience_level
+      experience_level: req.body.experience_level,
+      company_id: req.user.company.company_id
     });
 
     job.save(function(err) {
@@ -48,7 +50,7 @@ exports.postJob = function(req, res, next) {
       req.flash('success', { msg: 'Job has been posted Successfully.' });
       res.redirect('/job');
     });
-//  }
+  }
 };
 
 exports.viewJob = function(req, res) {

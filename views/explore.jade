@@ -11,21 +11,26 @@ block content
       }(document, 'script', 'facebook-jssdk'));
     script(style="position: relative; float: right;" src='//platform.linkedin.com/in.js', type='text/javascript')
       lang: en_US
-    p.lead Let's see who's looking for you
+    if whoareyou == 'company'
+      p.lead Here are your job listings so far
+    else 
+      p.lead Let's see who's looking for you
     hr
     each job in jobs
-      .col-xs-8
+      .col-xs-12.col-sm-8
         #accordion.panel-group
           #panel1.panel.panel-info
             .panel-heading
               h4.panel-title
-                a(data-toggle='collapse', data-target='#{job.job_id}', href='/viewJob?jobid=#{job.job_id}')
+                a(data-toggle='collapse', data-target='#{job.job_id}', href='/viewJob?jobid=#{job.job_id}&companyid=#{job.company_id}')
                   div(id="#fb-root")
                     |  #{job.job_title}, #{job.location}
-                    script(type='IN/Share', data-url='http://jraas.elasticbeanstalk.com/viewJob?jobid=#{job.job_id}')
-                    .fb-share-button(style="padding-right: 3px; position: relative; float: right;" data-href='http://jraas.elasticbeanstalk.com/viewJob?jobid=#{job.job_id}', data-layout='button')
+                    script(type='IN/Share', data-url='http://jraas.elasticbeanstalk.com/viewJob?jobid=#{job.job_id}&companyid=#{job.company_id}')
+                    .fb-share-button(style="padding-right: 3px; float: right;" data-href='http://jraas.elasticbeanstalk.com/viewJob?jobid=#{job.job_id}&companyid=#{job.company_id}', data-layout='button')
             |         
             div(id="#collapse#{job.job_id}").panel-collapse.collapse.in
               .panel-body
-                | #{job.description}
+                p
+                  b  Skill Set: 
+                  |  #{job.skill_set}
           |      

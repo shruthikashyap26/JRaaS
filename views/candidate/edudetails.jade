@@ -11,23 +11,23 @@ block content
           .form-group
             label(class='col-sm-2 control-label', for='school') School
             .col-sm-4
-              input.form-control(type='text', name='school', id='school', placeholder="School Name")
+              input.form-control(type='text', name='school', id='school', placeholder="School Name", value='#{user.edudetails.school}')
           .form-group
             label(class='col-sm-2 control-label', for='field') Field
             .col-sm-4
-              input.form-control(type='text', name='field', id='field', placeholder="Eg: Sales, Computer Scienc")
+              input.form-control(type='text', name='field', id='field', placeholder="Eg: Sales, Computer Scienc", value='#{user.edudetails.field}')
           .form-group
             label(class='col-sm-2 control-label', for='degree') Degree
             .col-sm-4
-              input.form-control(type='text',name='degree', id='degree', placeholder="Eg: BS, MS")
+              input.form-control(type='text',name='degree', id='degree', placeholder="Eg: BS, MS", value='#{user.edudetails.degree}')
           .form-group
             label(class='col-sm-2 control-label', for='start_year') Start Year
             .col-sm-4
-              input.form-control(type='text',name='start_year', id='start_year', placeholder="Eg: 2014")
+              input.form-control(type='text',name='start_year', id='start_year', placeholder="Eg: 2014", value='#{user.edudetails.start_year}')
           .form-group
             label(class='col-sm-2 control-label', for='end_year') End Year
             .col-sm-4
-              input.form-control(type='text',name='end_year', id='end_year', placeholder="Eg: 2015")
+              input.form-control(type='text',name='end_year', id='end_year', placeholder="Eg: 2015", value='#{user.edudetails.end_year}')
           .form-group
               .col-sm-offset-2.col-sm-4
               button.btn.btn.btn-primary(type='submit')

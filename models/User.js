@@ -1,6 +1,7 @@
 var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var shortid = require('shortid');
 
 var userSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true },
@@ -51,7 +52,8 @@ var userSchema = new mongoose.Schema({
     website: { type: String, default: '' },
     address: { type: String, default: '' },
     phone: { type: String, default: '' },
-    contact_email: { type: String, default: '' }
+    contact_email: { type: String, default: '' },
+    company_id: { type: String, default: '' }
   },
 
   resetPasswordToken: String,

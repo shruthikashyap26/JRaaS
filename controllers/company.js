@@ -1,14 +1,20 @@
 var secrets = require('../config/secrets');
 var User = require('../models/User');
+var shortid = require('shortid');
 
 /**
  * GET /company
  * Company form page.
  */
 exports.getCompany = function(req, res) {
-  res.render('company', {
-    title: 'Company'
-  });
+  if(User.whoareyou == 'candidate') {
+    req.flash('errors', {msg: 'Looks like an invalid url for your account.'});
+      return res.redirect('/');
+  } else {
+    res.render('company', {
+      title: 'Company'
+    });
+  }
 };
 
 /**
@@ -35,6 +41,7 @@ exports.postCompany = function(req, res) {
     user.company.address = req.body.address;
     user.company.phone = req.body.phone;
     user.company.contact_email = req.body.contact_email;
+    user.company.company_id = shortid.generate();
 
     user.save(function(err) {
       if (err) return next(err);

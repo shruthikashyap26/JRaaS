@@ -5,8 +5,10 @@ head
 block content
   if !user 
     p.lead.col-sm-offset-3 Recruiting is Broken! Login and stop searching!
-  else 
+  else if user.whoareyou=='candidate'
     p.lead.col-sm-offset-3 Check jobs to see your matches based on your profile
+  else
+    p.lead.col-sm-offset-3 Post a job and we'll find you the right candidate
   hr
   script.
     $(document).ready(function() {

@@ -10,11 +10,11 @@ block content
       .form-group
         label.col-sm-2.control-label(for='title') Title
         .col-sm-4
-          input#title.form-control(type='text', name='title', rows='3', placeholder='Developer, Intern, Sales Executive')
+          input#title.form-control(type='text', name='title', rows='3', placeholder='Developer, Intern, Sales Executive', value='#{user.profilesummary.title}')
       .form-group
         label.col-sm-2.control-label(for='specialization') Specialization
         .col-sm-4
-          select#specialization(name='specialization')
+          select#specialization(name='specialization', value='#{user.profilesummary.specialization}')
             option(value='Engineering Backend' selected) Engineering Backend
             option(value='Engineering Frontend') Engineering Frontend
             option(value='Engineering Devops') Engineering Devops
@@ -29,11 +29,11 @@ block content
       .form-group
         label.col-sm-2.control-label(for='skills') Skills
         .col-sm-4
-          input#skills.form-control(type='text', name='skills', rows='3', placeholder='enter relevant skills based on specialization')
+          input#skills.form-control(type='text', name='skills', rows='3', placeholder='enter relevant skills based on specialization', value='#{user.profilesummary.skills}')
       .form-group
         label.col-sm-2.control-label(for='location') Location
         .col-sm-4
-          input#location.form-control(type='text', name='location', rows='3', placeholder='enter your current location for optimal matching')
+          input#location.form-control(type='text', name='location', rows='3', placeholder='enter your current location for optimal matching', value='#{user.profilesummary.location}')
       .form-group
         label.col-sm-2.control-label(for='search') Looking for 
         .col-sm-4

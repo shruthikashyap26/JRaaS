@@ -18,7 +18,7 @@
             a(href='/explore', data-toggle='search')
               i.fa.fa-search
                 |  Find a Job
-        else
+        else if user.whoareyou=='candidate'
           li(class=title=='Home'?'active':undefined)
             a(href='/') Home
           li(class=title=='Find a Job'?'active':undefined)
@@ -26,7 +26,14 @@
               i.fa.fa-search
                 |  Find a Job
           li(class=title=='Messages'?'active':undefined)
-            a(href='/contact') Contact
+            a(href='/profilesummary') Profile
+        else
+          li(class=title=='Home'?'active':undefined)
+            a(href='/exploreByCompany') Home
+          li(class=title=='Post a Job'?'active':undefined)
+            a(href='/job') Post a Job
+          li(class=title=='Company Profile'?'active':undefined)
+            a(href='/company') Profile
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=title=='Login'?'active':undefined)

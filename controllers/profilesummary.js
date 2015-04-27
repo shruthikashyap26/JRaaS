@@ -6,9 +6,14 @@ var secrets = require('../config/secrets');
  * Profile form page.
  */
 exports.getProfile = function(req, res) {
-  res.render('candidate/profilesummary', {
-    title: 'Candidate Profile'
-  });
+  if(User.whoareyou == 'company') {
+    req.flash('errors', {msg: 'Looks like an invalid url for your account.'});
+      return res.redirect('/');
+  } else {
+    res.render('candidate/profilesummary', {
+      title: 'Candidate Profile'
+    });
+  }
 };
 /**
  * POST /profilesummary
@@ -46,8 +51,8 @@ exports.getWorkDetails = function(req, res) {
 exports.postWorkDetails = function(req, res) {
   User.findById(req.user.id, function(err, user) {
     if (err) return next(err);
-    console.log("the req body is   " +  req.body.company_name + "   " + req.body.company_name +"  " + req.body.role);
-    console.log("WORK COUNT = "+req.body.workCount);
+    //console.log("the req body is   " +  req.body.company_name + "   " + req.body.company_name +"  " + req.body.role);
+    //console.log("WORK COUNT = "+req.body.workCount);
     if(req.body.workCount  == 1) 
     {
        user.workdetails.work.push({ 

@@ -21,6 +21,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var expressValidator = require('express-validator');
 var connectAssets = require('connect-assets');
+var shortid = require('shortid');
 
 /**
  * Controllers (route handlers).
@@ -124,6 +125,7 @@ app.post('/company', passportConf.isAuthenticated, companyController.postCompany
 app.get('/job', passportConf.isAuthenticated, jobController.getJob);
 app.post('/job', passportConf.isAuthenticated, jobController.postJob);
 app.get('/explore', exploreController.explore);
+app.get('/exploreByCompany', passportConf.isAuthenticated, exploreController.exploreByCompany);
 app.get('/viewjob', jobController.viewJob);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);

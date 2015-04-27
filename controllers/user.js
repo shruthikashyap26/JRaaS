@@ -41,7 +41,10 @@ exports.postLogin = function(req, res, next) {
     req.logIn(user, function(err) {
       if (err) return next(err);
       req.flash('success', { msg: 'Success! You are logged in.' });
-      res.redirect(req.session.returnTo || '/');
+      if (user.whoareyou == 'candidate')
+        res.redirect(req.session.returnTo || '/');
+      else if (user.whoareyou == 'company')
+        res.redirect(req.session.returnTo || '/exploreByCompany');
     });
   })(req, res, next);
 };
@@ -100,7 +103,7 @@ exports.postSignup = function(req, res, next) {
         if (user.whoareyou == 'candidate')
           res.redirect('/profileSummary');
         else if (user.whoareyou == 'company')
-          res.redirect('/job');
+          res.redirect('/company');
       });
     });
   });
