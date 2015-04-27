@@ -24,13 +24,111 @@ block content
           input(type='radio', checked=user.profile.gender=='female', name='gender', value='female', data-toggle='radio')
           span Female
     .form-group
-      label.col-sm-2.control-label(for='location') Location
-      .col-sm-4
-        input.form-control(type='text', name='location', id='location', value='#{user.profile.location}')
-    .form-group
       label.col-sm-2.control-label(for='website') Website
       .col-sm-4
         input.form-control(type='text', name='website', id='website', value='#{user.profile.website}')
+    .form-group
+      label.col-sm-2.control-label(for='title') Title
+      .col-sm-4
+        input.form-control(type='text', name='title', id='title', value='#{user.profilesummary.title}')
+    .form-group
+      label.col-sm-2.control-label(for='specialization') Specialization
+      .col-sm-4
+        input.form-control(type='text', name='specialization', id='specialization', value='#{user.profilesummary.specialization}')
+    .form-group
+      label.col-sm-2.control-label(for='skills') Skills
+      .col-sm-4
+        input.form-control(type='text', name='skills', id='skills', value='#{user.profilesummary.skills}')
+    .form-group
+      label.col-sm-2.control-label(for='location') Location
+      .col-sm-4
+        input.form-control(type='text', name='location', id='location', value='#{user.profilesummary.location}')
+    .form-group
+      label.col-sm-2.control-label(for='workHistory') Work History
+      .col-sm-4
+    .form-group
+      .input_container
+        each val,index in user.workdetails.work
+          div
+            label.col-sm-2.control-label(for='company_name') Company :
+            textarea#company.add_input(name='company_name', rows='1', cols='40', placeholder='Company Name')=val.company_name
+            button.deleteWork(type='button')='Delete Work Experience'
+            br
+            br
+            label.col-sm-2.control-label(for='job_title') Job Title :
+            textarea#job_title.add_input1(name='job_title', rows='1', cols='40', placeholder='Job Title')=val.job_title
+            br
+            br
+            label.col-sm-2.control-label(for='role') Summary :
+            textarea#role.add_input2(name='role', rows='4', cols='40', placeholder='Elaborate on your contribution to different projects and role')=val.role
+            br
+            br
+
+        input.add_button(type = 'button' value = 'ADD Another work item' id = 'addButton')
+        input(id = 'workCount' type='hidden', name='workCount', value='#{user.workdetails.work.length}')
+
+      script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+      script.
+        var count = $('#workCount').val();
+        function appendHtml(){
+          $('.add_button').before('<div><label for="company_name" class="col-sm-2 control-label">Company :</label><textarea id="company" name="company_name" rows="1" cols="40" placeholder="Company Name" class="add_input"></textarea><button type="button" class="deleteWork">Delete Work Experience</button><br/><br/><label for="job_title" class="col-sm-2 control-label">Job Title :</label><textarea id="job_title" name="job_title" rows="1" cols="40" placeholder="Job Title" class="add_input1"></textarea><br/><br/><label for="role" class="col-sm-2 control-label">Summary : </label><textarea id="role" name="role" rows="4" cols="40" placeholder="Elaborate on your contribution to different projects and role" class="add_input2"></textarea><br/><br/></div>' ) ;
+        }
+        //$(document).ready(appendHtml());
+        $("#addButton").on("click",function()
+        {
+          $('#workCount').val(++count);
+          appendHtml();
+        });
+        $(document.body).on("click",".deleteWork",function(){
+          $('#workCount').val(--count);
+          $(this).closest('div').remove();
+          });
+
+    .form-group
+      .input_container
+        each val,index in user.schooldetails.education
+          div
+            label.col-sm-2.control-label(for='school') School :
+            textarea#school.add_input(name='school', rows='1', cols='40', placeholder='School Name')=val.school
+            button.deleteSchool(type='button')='Delete School'
+            br
+            br
+            label.col-sm-2.control-label(for='field') Field :
+            textarea#field.add_input1(name='field', rows='1', cols='40', placeholder='Field')=val.field
+            br
+            br
+            label.col-sm-2.control-label(for='degree') Degree :
+            textarea#degree.add_input2(name='degree', rows='4', cols='40', placeholder='Degree')=val.degree
+            br
+            br
+            label.col-sm-2.control-label(for='startdate') Start Date :
+            textarea#startdate.add_input2(name='startdate', rows='4', cols='40', placeholder='Year')=val.start_year
+            br
+            br
+            label.col-sm-2.control-label(for='enddate') End Date :
+            textarea#enddate.add_input2(name='enddate', rows='4', cols='40', placeholder='Year')=val.end_year
+            br
+            br
+
+        input.add_schoolbutton(type = 'button' value = 'ADD Another School' id = 'addSchoolButton')
+        input(id = 'schoolCount' type='hidden', name='schoolCount', value='#{user.schooldetails.education.length}')
+
+      script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+      script.
+        var scount = $('#schoolCount').val();
+        function appendHtml(){
+          $('.add_schoolbutton').before('<label for="school" class="col-sm-2 control-label">School :</label><textarea id="school" name="school" rows="1" cols="40" placeholder="School Name" class="add_input"></textarea><br/><br/><label for="field" class="col-sm-2 control-label">Field :</label><textarea id="field" name="field" rows="1" cols="40" placeholder="Field" class="add_input1"></textarea><br/><br/><label for="degree" class="col-sm-2 control-label">Degree : </label><textarea id="degree" name="degree" rows="4" cols="40" placeholder="Degree" class="add_input2"></textarea><br/><br/><label for="start_year" class="col-sm-2 control-label">Start Year : </label><textarea id="start_year" name="start_year" rows="4" cols="40" placeholder="Year" class="add_input3"></textarea><br/><br/><label for="end_year" class="col-sm-2 control-label">End Year : </label><textarea id="end_year" name="end_year" rows="4" cols="40" placeholder="Year" class="add_input4"></textarea><br/><br/>' ) ;
+        }
+        //$(document).ready(appendHtml());
+        $("#addSchoolButton").on("click",function()
+        {
+          $('#schoolCount').val(++scount);
+          appendHtml();
+        });
+        $(document.body).on("click",".deleteSchool",function(){
+          $('#schoolCount').val(--scount);
+          $(this).closest('div').remove();
+          });
     .form-group
       label.col-sm-2.control-label(for='gravatar') Gravatar
       .col-sm-4
