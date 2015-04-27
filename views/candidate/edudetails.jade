@@ -5,31 +5,28 @@ block content
       h3 Education History
       .col-sm-2
       h4 Please provide education history to complete your profile.
+    body
+      form.form-horizontal(id='edudetails' method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .input_container
+          input.add_button(type = 'button' value = 'ADD Another School' id = 'addButton')
+          input(id = 'workCount' type='hidden', name='workCount', value='1')
 
-      form.form-horizontal(id='profile' method='POST')
-          input(type='hidden', name='_csrf', value=_csrf)
-          .form-group
-            label(class='col-sm-2 control-label', for='school') School
-            .col-sm-4
-              input.form-control(type='text', name='school', id='school', placeholder="School Name")
-          .form-group
-            label(class='col-sm-2 control-label', for='field') Field
-            .col-sm-4
-              input.form-control(type='text', name='field', id='field', placeholder="Eg: Sales, Computer Scienc")
-          .form-group
-            label(class='col-sm-2 control-label', for='degree') Degree
-            .col-sm-4
-              input.form-control(type='text',name='degree', id='degree', placeholder="Eg: BS, MS")
-          .form-group
-            label(class='col-sm-2 control-label', for='start_year') Start Year
-            .col-sm-4
-              input.form-control(type='text',name='start_year', id='start_year', placeholder="Eg: 2014")
-          .form-group
-            label(class='col-sm-2 control-label', for='end_year') End Year
-            .col-sm-4
-              input.form-control(type='text',name='end_year', id='end_year', placeholder="Eg: 2015")
-          .form-group
-              .col-sm-offset-2.col-sm-4
-              button.btn.btn.btn-primary(type='submit')
-                span.ion-edit
-                | Next
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+        script.
+          var count = 1;
+          function appendHtml(){
+            $('.add_button').before('<label for="school" class="col-sm-2 control-label">School :</label><textarea id="school" name="school" rows="1" cols="40" placeholder="School Name" class="add_input"></textarea><br/><br/><label for="field" class="col-sm-2 control-label">Field :</label><textarea id="field" name="field" rows="1" cols="40" placeholder="Field" class="add_input1"></textarea><br/><br/><label for="degree" class="col-sm-2 control-label">Degree : </label><textarea id="degree" name="degree" rows="4" cols="40" placeholder="Degree" class="add_input2"></textarea><br/><br/><label for="start_year" class="col-sm-2 control-label">Start Year : </label><textarea id="start_year" name="start_year" rows="4" cols="40" placeholder="Year" class="add_input3"></textarea><br/><br/><label for="end_year" class="col-sm-2 control-label">End Year : </label><textarea id="end_year" name="end_year" rows="4" cols="40" placeholder="Year" class="add_input4"></textarea><br/><br/>' ) ;
+          }
+          $(document).ready(appendHtml());
+          $("#addButton").on("click",function()
+          {
+            $('#workCount').val(++count);
+            appendHtml();
+          });
+
+        .form-group
+            .col-sm-offset-2.col-sm-4
+            button.btn.btn.btn-primary(type='submit')
+              span.ion-edit
+              | Next

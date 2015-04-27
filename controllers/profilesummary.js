@@ -99,14 +99,36 @@ exports.getEduDetails = function(req, res) {
  * Profile form page.
  */
 exports.postEduDetails = function(req, res) {
+    User.findById(req.user.id, function(err, user) {
+    if (err) return next(err);
+    console.log("the req body is   " +  req.body.school + "   " + req.body.school +"  " + req.body.field);
+    console.log("WORK COUNT = "+req.body.workCount);
+    if(req.body.workCount  == 1) 
+    {
+       user.schooldetails.education.push({ 
+          school : req.body.school ,field : req.body.field ,degree : req.body.degree , start_year : req.body.start_year , end_year : req.body.end_year }); 
+    }
+    else 
+    {
+      for (var  i=0; i< req.body.workCount; i++)
+      {
+        if(req.body.school[i] != '' &&  (req.body.field[i] != '' || req.body.degree[i] != '') )
+        {
+          user.schooldetails.education.push({
+            school : req.body.school[i] ,field : req.body.field[i] ,degree : req.body.degree[i] , start_year : req.body.start_year[i] , end_year : req.body.end_year[i]   
+          });
+        }   
+      }
+    }
+/*
   	User.findById(req.user.id, function(err, user) {
     if (err) return next(err);
-    user.edudetails.school = req.body.school || '';
+    user.edudetails.school_name = req.body.school || '';
     user.edudetails.field = req.body.field || '';
     user.edudetails.degree = req.body.degree || '';
     user.edudetails.start_year = req.body.start_year || '';
     user.edudetails.end_year = req.body.end_year || '';
-
+*/
     user.save(function(err) {
       if (err) return next(err);
        res.redirect('/extradetails');
