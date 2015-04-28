@@ -9,8 +9,8 @@ block content
       form.form-horizontal(id='workdetails' method='POST')
         input(type='hidden', name='_csrf', value=_csrf)
         .input_container
-          input.add_button(type = 'button' value = 'ADD Another work item' id = 'addButton')
-          input(id = 'workCount' type='hidden', name='workCount', value='1')
+          input.add_button(type = 'button', value = 'ADD Another work item', id = 'addButton')
+          input(id = 'workCount', type='hidden', name='workCount', value='1')
 
         script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
         script.
