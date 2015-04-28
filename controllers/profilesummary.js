@@ -10,7 +10,7 @@ exports.getProfile = function(req, res) {
     req.flash('errors', {msg: 'Looks like an invalid url for your account.'});
       return res.redirect('/');
   } else {
-    res.render('candidate/profilesummary', {
+    res.render('account/profile', {
       title: 'Candidate Profile'
     });
   }

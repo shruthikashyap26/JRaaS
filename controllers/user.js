@@ -114,8 +114,18 @@ exports.postSignup = function(req, res, next) {
  * Profile page.
  */
 exports.getAccount = function(req, res) {
-  res.render('account/profile', {
+  User.findById(req.user.id, function(err,user) {
+    if (err) return next(err);
+    if( User.findById(req.user.whoareyou) == "candidate") { 
+      res.render('account/profile', {
+      title: 'Account Management'
+      });
+    }
+    else {
+      res.render('account/profile', {
     title: 'Account Management'
+  });
+    }
   });
 };
 
@@ -131,72 +141,87 @@ exports.postUpdateProfile = function(req, res, next) {
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
     user.profile.gender = req.body.gender || '';
-    user.profile.website = req.body.website || '';
+    user.profile.location = req.body.location || '';
 
-    user.profilesummary.title = req.body.email || '';
-    user.profilesummary.skills = req.body.skiils || '';
-    user.profilesummary.specialization = req.body.specialization || '';
-    user.profilesummary.location = req.body.location || '';
+    console.log("the whoareyou is " + req.body.whoareu);
+    if (req.body.whoareu == "candidate" ) 
+    {
+      user.profile.website = req.body.website || '';
 
-    if(req.body.workCount == 0) 
-    {
-      console.log("sneha here");
-      //user.update({"email": req.body.email}, user.workdetails: {$exists: true}}, 
-        //        {$set: {user.workdetails: []}}))
-      User.findOneAndUpdate({"email": req.body.email} , {$pull : { "workdetails.work": {}}},function(err,place){console.log("error updating")});
-      user.workdetails.work.push({
-        company_name : "none" , job_title : "none" , role : "none"});
-    }
+      user.profilesummary.title = req.body.email || '';
+      user.profilesummary.skills = req.body.skills || '';
+      user.profilesummary.specialization = req.body.specialization || '';
+      user.profilesummary.location = req.body.location || '';
 
-    else if(req.body.workCount  == 1) 
-    {
-            User.findOneAndUpdate({"email": req.body.email} , {$pull : { "workdetails.work": {}}},function(err,place){console.log("error updating")});
-       user.workdetails.work.push({ 
-          company_name : req.body.company_name ,job_title : req.body.job_title ,role : req.body.role }); 
-    }
-    else 
-    {
-      for (var  i=0; i< req.body.workCount; i++)
+      if(req.body.workCount == 0) 
       {
-        if(req.body.company_name[i] != '' && req.body.job_title[i] != '' && req.body.role[i] != '') 
-        {
-                User.findOneAndUpdate({"email": req.body.email} , {$pull : { "workdetails.work": {}}},function(err,place){console.log("error updating")});
-          user.workdetails.work.push({ 
-            company_name : req.body.company_name[i] ,job_title : req.body.job_title[i] ,role : req.body.role[i]  
-          });
-        }  
+        console.log("sneha here");
+        //user.update({"email": req.body.email}, user.workdetails: {$exists: true}}, 
+          //        {$set: {user.workdetails: []}}))
+        User.findOneAndUpdate({"email": req.body.email} , {$pull : { "workdetails.work": {}}},function(err,place){console.log("error updating")});
+        user.workdetails.work.push({
+          company_name : "none" , job_title : "none" , role : "none"});
       }
-    } 
 
-    if(req.body.schoolCount == 0) 
-    {
-      console.log("sneha school here");
-      //user.update({"email": req.body.email}, user.workdetails: {$exists: true}}, 
-        //        {$set: {user.workdetails: []}}))
-      User.findOneAndUpdate({"email": req.body.email} , {$pull : { "schooldetails.education": {}}},function(err,place){console.log("error updating")});
-      user.schooldetails.education.push({
-        school : "none"  ,field : "none"  ,degree : "none"  , start_year : "none"  , end_year : "none" }); 
-    }
-
-    else if(req.body.schoolCount  == 1) 
-    {
-      User.findOneAndUpdate({"email": req.body.email} , {$pull : { "schooldetails.education": {}}},function(err,place){console.log("error updating")});
-       user.schooldetails.education.push({ 
-          school : req.body.school ,field : req.body.field ,degree : req.body.degree , start_year : req.body.start_year , end_year : req.body.end_year }); 
-    }
-    else 
-    {
-      for (var  i=0; i< req.body.schoolCount; i++)
+      else if(req.body.workCount  == 1) 
       {
-        if(req.body.school[i] != '' &&  (req.body.field[i] != '' || req.body.degree[i] != '') )
-        {
-          User.findOneAndUpdate({"email": req.body.email} , {$pull : { "schooldetails.education": {}}},function(err,place){console.log("error updating")});
-          user.schooldetails.education.push({
-            school : req.body.school[i] ,field : req.body.field[i] ,degree : req.body.degree[i] , start_year : req.body.start_year[i] , end_year : req.body.end_year[i]   
-          });
-        }  
+              User.findOneAndUpdate({"email": req.body.email} , {$pull : { "workdetails.work": {}}},function(err,place){console.log("error updating")});
+         user.workdetails.work.push({ 
+            company_name : req.body.company_name ,job_title : req.body.job_title ,role : req.body.role }); 
       }
-    } 
+      else 
+      {
+        for (var  i=0; i< req.body.workCount; i++)
+        {
+          if(req.body.company_name[i] != '' && req.body.job_title[i] != '' && req.body.role[i] != '') 
+          {
+                  User.findOneAndUpdate({"email": req.body.email} , {$pull : { "workdetails.work": {}}},function(err,place){console.log("error updating")});
+            user.workdetails.work.push({ 
+              company_name : req.body.company_name[i] ,job_title : req.body.job_title[i] ,role : req.body.role[i]  
+            });
+          }  
+        }
+      } 
+
+      if(req.body.schoolCount == 0) 
+      {
+        console.log("sneha school here");
+        //user.update({"email": req.body.email}, user.workdetails: {$exists: true}}, 
+          //        {$set: {user.workdetails: []}}))
+        User.findOneAndUpdate({"email": req.body.email} , {$pull : { "schooldetails.education": {}}},function(err,place){console.log("error updating")});
+        user.schooldetails.education.push({
+          school : "none"  ,field : "none"  ,degree : "none"  , start_year : "none"  , end_year : "none" }); 
+      }
+
+      else if(req.body.schoolCount  == 1) 
+      {
+        User.findOneAndUpdate({"email": req.body.email} , {$pull : { "schooldetails.education": {}}},function(err,place){console.log("error updating")});
+         user.schooldetails.education.push({ 
+            school : req.body.school ,field : req.body.field ,degree : req.body.degree , start_year : req.body.start_year , end_year : req.body.end_year }); 
+      }
+      else 
+      {
+        for (var  i=0; i< req.body.schoolCount; i++)
+        {
+          if(req.body.school[i] != '' &&  (req.body.field[i] != '' || req.body.degree[i] != '') )
+          {
+            User.findOneAndUpdate({"email": req.body.email} , {$pull : { "schooldetails.education": {}}},function(err,place){console.log("error updating")});
+            user.schooldetails.education.push({
+              school : req.body.school[i] ,field : req.body.field[i] ,degree : req.body.degree[i] , start_year : req.body.start_year[i] , end_year : req.body.end_year[i]   
+            });
+          }  
+        }
+      } 
+    }
+    else if ( req.body.whoareu == "company" ) 
+    {
+      user.company.name = req.body.company_name;
+      user.company.description  = req.body.description;
+      user.company.website = req.body.website;
+      user.company.address =req.body.address;
+      user.company.phone = req.body.phone;
+      user.company.contact_email = req.body.contact_email;
+    }
 
     user.save(function(err) {
       if (err) return next(err);
@@ -205,7 +230,6 @@ exports.postUpdateProfile = function(req, res, next) {
     });
   });
 };
-
 /**
  * POST /account/password
  * Update current password.

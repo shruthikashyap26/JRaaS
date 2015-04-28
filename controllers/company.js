@@ -11,7 +11,7 @@ exports.getCompany = function(req, res) {
     req.flash('errors', {msg: 'Looks like an invalid url for your account.'});
       return res.redirect('/');
   } else {
-    res.render('company', {
+    res.render('account/profile', {
       title: 'Company'
     });
   }
