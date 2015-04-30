@@ -38,16 +38,6 @@ var userSchema = new mongoose.Schema({
     } ]
   },
 
-  edudetails: {
-    edu : [ {
-      school: {type: String, default:''},
-      field:  {type: String, default:''},
-      degree: {type: String, default:''},
-      start_year: {type: String, default:''},
-      end_year: {type: String, default:''}
-    } ]
-  },
-
   schooldetails: {
     education : [ {
       school: {type: String, default:''},
