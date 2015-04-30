@@ -7,11 +7,11 @@ var shortid = require('shortid');
  * Company form page.
  */
 exports.getCompany = function(req, res) {
-  if(User.whoareyou == 'candidate') {
+  if(undefined != req.user && req.user.whoareyou == 'candidate') {
     req.flash('errors', {msg: 'Looks like an invalid url for your account.'});
       return res.redirect('/');
   } else {
-    res.render('account/profile', {
+    res.render('company', {
       title: 'Company'
     });
   }

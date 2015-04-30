@@ -38,6 +38,10 @@ exports.explore = function(req, res) {
 		}
 		
 		Job.find({ location : new RegExp(stateName, 'i')}, function (err, joblist) {
+			if (joblist.length == 0) {
+				req.flash("info", {msg: "No jobs currently in the selected region"});
+				return res.redirect("/");
+			}
 			var matchedjoblist = [];
 			var jobString = [];
 			for (var i = 0; i < joblist.length; i++) {
@@ -68,7 +72,11 @@ exports.explore = function(req, res) {
 		}
 		var sort = {'_id' : -1};
 		Job.find({ location : new RegExp(stateName, 'i')}, function (err, joblist) {
-			console.log(joblist);
+			if (joblist.length == 0) {
+				req.flash("info", {msg: "No jobs currently in the selected region"});
+				return res.redirect("/");
+			}
+			//console.log(joblist);
 			res.render('explore', {
 				title : 'Find a job',
 				jobs : joblist,

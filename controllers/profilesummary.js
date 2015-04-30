@@ -10,7 +10,7 @@ exports.getProfile = function(req, res) {
     req.flash('errors', {msg: 'Looks like an invalid url for your account.'});
       return res.redirect('/');
   } else {
-    res.render('account/profile', {
+    res.render('candidate/profilesummary', {
       title: 'Candidate Profile'
     });
   }
@@ -22,7 +22,7 @@ exports.getProfile = function(req, res) {
 exports.postProfile = function(req, res) {
   User.findById(req.user.id, function(err, user) {
     if (err) return next(err);
-    console.log("value is" + req.body.specialization);
+    //console.log("value is" + req.body.specialization);
     user.profilesummary.title = req.body.title || '';
     user.profilesummary.specialization = req.body.specialization || '';
     user.profilesummary.skills = req.body.skills || '';
@@ -106,8 +106,8 @@ exports.getEduDetails = function(req, res) {
 exports.postEduDetails = function(req, res) {
     User.findById(req.user.id, function(err, user) {
     if (err) return next(err);
-    console.log("the req body is   " +  req.body.school + "   " + req.body.school +"  " + req.body.field);
-    console.log("WORK COUNT = "+req.body.workCount);
+    //console.log("the req body is   " +  req.body.school + "   " + req.body.school +"  " + req.body.field);
+    //console.log("WORK COUNT = "+req.body.workCount);
     if(req.body.workCount  == 1) 
     {
        user.schooldetails.education.push({ 

@@ -11,7 +11,11 @@ var secrets = require('../config/secrets');
  * Login page.
  */
 exports.getLogin = function(req, res) {
-  if (req.user) return res.redirect('/');
+  if (undefined != req.user && req.user.whoareyou == 'candidate') {
+    return res.redirect('/');
+  } else if (undefined != req.user && req.user.whoareyou == 'company') {
+    return res.redirect('/exploreByCompany');
+  }
   res.render('account/login', {
     title: 'Login'
   });
