@@ -22,6 +22,7 @@ var passport = require('passport');
 var expressValidator = require('express-validator');
 var connectAssets = require('connect-assets');
 var shortid = require('shortid');
+var cosine = require('cosine');
 
 /**
  * Controllers (route handlers).

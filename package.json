@@ -48,7 +48,8 @@
     "uglify-js": "^2.4.17",
     "validator": "^3.33.0",
     "yui": "^3.18.1",
-    "shortid": "^2.2.2"
+    "shortid": "^2.2.2",
+    "cosine": "0.0.1"
   },
   "devDependencies": {
     "blessed": "^0.0.49",
