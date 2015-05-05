@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  script.
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=669400563172268";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+  script(src='//platform.linkedin.com/in.js', type='text/javascript')
+      lang: en_US
+  .page-header.col-xs-10  
+      h3  #{job.job_title}
+      script(type='IN/Share', data-url='http://jraas.elasticbeanstalk.com/viewJob?jobid=#{job.job_id}&companyid=#{job.company_id}')
+      .fb-share-button(style="vertical-align: baseline !important;" data-href='http://jraas.elasticbeanstalk.com/viewJob?jobid=#{job.job_id}&companyid=#{job.company_id}', data-layout='button')
+  .col-sm-10.col-xs-8
+    label Job Description
+    p  #{job.description}
+    hr
+    label  Experience Level
+    p  #{job.experience_level}
+    hr
+    label  Job Skills
+    p  #{job.skill_set}
+    hr
+    label  Job Location
+    p  #{job.location}
