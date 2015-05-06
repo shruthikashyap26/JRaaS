@@ -2,12 +2,13 @@ var User = require('../models/User');
 var Job = require('../models/Job');
 var secrets = require('../config/secrets');
 var cosine = require('cosine');
+var stringMod = require('string');
 
 function getCandidateDetailsAsString(user) {
 	var profilesummary = user.profilesummary.title + " " + user.profilesummary.specialization + " " + user.profilesummary.skills
 							+ " " + user.profilesummary.location;
 
-	var workdetails = "";
+	/*var workdetails = "";
 
 	for (var i = 0; i < user.workdetails.work.length; i++) {
 		workdetails += user.workdetails.work[i].job_title + " " + user.workdetails.work[i].role;
@@ -17,9 +18,9 @@ function getCandidateDetailsAsString(user) {
 
 	for (var i = 0; i < user.schooldetails.education.length; i++) {
 		schooldetails += user.schooldetails.education[i].school + " " + user.schooldetails.education[i].field + " " + user.schooldetails.education[i].degree;
-	}
+	}*/
 
-	var candidatedetails = profilesummary + workdetails + schooldetails;
+	var candidatedetails = profilesummary; // + workdetails + schooldetails;
 
 	return candidatedetails;
 }
@@ -44,15 +45,34 @@ exports.explore = function(req, res) {
 			}
 			var matchedjoblist = [];
 			var jobString = [];
+			var parseCandidateValues = candidatedetails.toLowerCase().split(/[ ,.]+/);
+			var candidateArray = stringMod(parseCandidateValues).parseCSV(',',"'");
+			//console.log(candidateArray);
 			for (var i = 0; i < joblist.length; i++) {
-				var stringedJob = joblist[i].job_title + " " + joblist[i].description + " " + joblist[i].skill_set + " " + joblist[i].location + " " + joblist[i].experience_level;
-				var cosineValue = cosine(candidatedetails.split(/\s/), stringedJob.split(/\s/));
-				console.log("Cosine Value for job id: " + joblist[i].job_id + " is " + cosineValue);
-				if (Math.round(cosineValue * 100) > Math.round(0.5 * 100)) {
+				var stringedJob = joblist[i].skill_set + " "+ joblist[i].location; //joblist[i].job_title + " " + joblist[i].description + " " + joblist[i].skill_set + " " + joblist[i].location + " " + joblist[i].experience_level;
+				var parseJob = stringedJob.toLowerCase().split(/[ ,.]+/);
+				var jobArray = stringMod(parseJob).parseCSV(',', "'");
+				//console.log(jobArray);
+				//var cosineValue = cosine(candidatedetails.toLowerCase().split(/[ ,]+/), stringedJob.toLowerCase().split(/[ ,]+/));
+				var cosineValue1 = cosine(candidateArray, jobArray);
+				//console.log("Cosine Value1 for job id: " + joblist[i].job_id + " is " + cosineValue1);
+				var filteredCandidateArray = candidateArray.filter( function( el ) {
+  								return jobArray.indexOf( el ) > 0;
+							  });
+				//console.log("Filtered Array: " + filteredCandidateArray);
+				var cosineValue2 = cosine(filteredCandidateArray, jobArray);
+				//console.log("Cosine Value2 for job id: " + joblist[i].job_id + " is " + cosineValue2);
+				if ((Math.round(cosineValue1 * 100) > Math.round(0.5 * 100)) || (Math.round(cosineValue2 * 100) > Math.round(0.7 * 100)))  {
 					matchedjoblist.push({job_id: joblist[i].job_id, company_id: joblist[i].company_id, job_title: joblist[i].job_title, 
 						skill_set: joblist[i].skill_set, description: joblist[i].description, location: joblist[i].location,
 						experience_level: joblist[i].experience_level});
 				}
+			}
+
+			var displayAll = false;
+			if (joblist.length != 0 && matchedjoblist.length == 0) {
+				matchedjoblist = joblist;
+				displayAll = true;
 			}
 
 			res.render('explore', {
@@ -60,6 +80,7 @@ exports.explore = function(req, res) {
 				jobs : matchedjoblist,
 				fb : secrets.facebook,
 				ln : secrets.linkedin,
+				displayAll : displayAll,
 				whoareyou : req.user.whoareyou
 			});
 		});

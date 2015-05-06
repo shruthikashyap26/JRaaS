@@ -14,7 +14,10 @@ block content
     if whoareyou == 'company'
       p.lead Here are your job listings so far
     else if whoareyou == 'candidate'
-      p.lead Here are you matched jobs
+      if displayAll == true
+        p.lead No jobs were matched. Displaying all jobs
+      else
+        p.lead Here are you matched jobs
     else 
       p.lead Let's see who's looking for you
     hr

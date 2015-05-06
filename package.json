@@ -49,7 +49,8 @@
     "validator": "^3.33.0",
     "yui": "^3.18.1",
     "shortid": "^2.2.2",
-    "cosine": "0.0.1"
+    "cosine": "0.0.1",
+    "string": "3.1.1"
   },
   "devDependencies": {
     "blessed": "^0.0.49",
