@@ -28,17 +28,47 @@ block content
             .panel-heading
               h4.panel-title
                 a(data-toggle='collapse', data-target='#{job.job_id}', href='/viewJob?jobid=#{job.job_id}&companyid=#{job.company_id}')
-                  div(id="#fb-root")
-                    |  #{job.job_title}, #{job.location}
+                  div(id="#fb-root") #{job.job_title}, #{job.location}
                     script(type='IN/Share', data-url='http://jraas.elasticbeanstalk.com/viewJob?jobid=#{job.job_id}&companyid=#{job.company_id}')
                     .fb-share-button(style="padding-right: 3px; float: right;" data-href='http://jraas.elasticbeanstalk.com/viewJob?jobid=#{job.job_id}&companyid=#{job.company_id}', data-layout='button')
-            |         
+       
             div(id="#collapse#{job.job_id}").panel-collapse.collapse.in
               .panel-body
                 p
-                  b  Skill Set: 
-                  |  #{job.skill_set}
+                  b  Skill Set: #{job.skill_set}
+        if whoareyou == 'candidate'
+          form.form-horizontal(action='/explore/sendMail', method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            input(type='hidden', name='candidateId', value='#{userEmailId}')
+            input(type='hidden', name='jobId', value='#{job.job_id}')
+            .form-group
+              .col-sm-offset-2.col-sm-10
+              button.btn.btn.btn-primary(type='submit' value='#{job.job_id}' class='interested') Interested
 
-        .form-group
-          .col-sm-offset-2.col-sm-10
-          button.btn.btn.btn-primary(type='button' value='#{job.job_id}' id='interested') Interested      
+
+    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+    script.
+      $('#xyz').click(function(){
+        var interest = $(this).val();
+        var emailId = '#{userEmailId}';
+        var cookies = document.cookie.split(";");
+        var cookieValue = null;
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = jQuery.trim(cookies[i]); 
+          if (cookie.substring(0, name.length + 1) == (name + '=')) { 
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1)); 
+            break; 
+          }
+        }
+        alert(interest+emailId+cookieValue);
+        $.ajax({
+          type: 'POST',
+          contentType: 'application/json',
+          dataType: 'json',
+          data: JSON.stringify({ "candidateId": emailId,"jobId":interest }),
+          success: function() {alert("Your Interest Has Been Notified");},
+          error: function(){alert("Unable To Communicate Your Interest!");},
+          url: 'http://localhost:3000/explore',
+          cache:false
+          });
+      });   

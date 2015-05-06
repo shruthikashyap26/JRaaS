@@ -3,6 +3,14 @@ var Job = require('../models/Job');
 var secrets = require('../config/secrets');
 var cosine = require('cosine');
 var stringMod = require('string');
+var nodemailer = require("nodemailer");
+var transporter = nodemailer.createTransport({
+  service: 'mailGun',
+  auth: {
+    user: secrets.mailgun.user,
+    pass: secrets.mailgun.password
+  }
+});
 
 function getCandidateDetailsAsString(user) {
 	var profilesummary = user.profilesummary.title + " " + user.profilesummary.specialization + " " + user.profilesummary.skills
@@ -81,7 +89,8 @@ exports.explore = function(req, res) {
 				fb : secrets.facebook,
 				ln : secrets.linkedin,
 				displayAll : displayAll,
-				whoareyou : req.user.whoareyou
+				whoareyou : req.user.whoareyou,
+				userEmailId : req.user.email
 			});
 		});
     } else {
@@ -124,4 +133,41 @@ exports.exploreByCompany = function(req, res) {
 		req.flash('errors', {msg: 'Looks like an invalid url for your account.'});
 		return res.redirect('/job');
 	}
+};
+
+exports.sendMail = function(req,res,next) {
+	console.log("SENDMAIL...");
+	var from = "jraasinc@gmail.com";
+	var name = "JRaaS Admin";
+	var candidateId = req.body.candidateId;
+	var interestJobId = req.body.jobId;
+	var body = "Hi , Candidate " +candidateId+ " is interested in your job  " + interestJobId + " . Please contact him .";
+	var to = 'jraasinc@gmail.com';
+	var subject = "Job interest notification";
+
+	var mailOptions = {
+		to: to,
+		from: from,
+		subject: subject,
+		text: body
+	};
+
+	transporter.sendMail(mailOptions, function(err) {
+		if (err) {
+			console.log("Error mailing");
+			//res.writeHead(400, {"Content-Type": "text/plain"});
+			//res.write("Email could not be sent!");
+			//res.end();
+			req.flash('success', { msg: 'Email could not be sent!' });
+			res.redirect('/explore');
+			//return res.redirect('/explore');
+		}
+		else{
+			console.log("Success");
+			req.flash('success', { msg: 'Email has been sent successfully!' });
+			res.redirect('/explore');
+		}
+	//req.flash('success', { msg: 'Email has been sent successfully!' });
+	//res.redirect('/explore');
+	});
 };
