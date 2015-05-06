@@ -36,39 +36,9 @@ block content
               .panel-body
                 p
                   b  Skill Set: #{job.skill_set}
-        if whoareyou == 'candidate'
-          form.form-horizontal(action='/explore/sendMail', method='POST')
-            input(type='hidden', name='_csrf', value=_csrf)
-            input(type='hidden', name='candidateId', value='#{userEmailId}')
-            input(type='hidden', name='jobId', value='#{job.job_id}')
-            .form-group
-              .col-sm-offset-2.col-sm-10
+          if whoareyou == 'candidate'
+            form.form-horizontal(action='/explore/sendMail', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
               button.btn.btn.btn-primary(type='submit' value='#{job.job_id}' class='interested') Interested
-
-
-    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
-    script.
-      $('#xyz').click(function(){
-        var interest = $(this).val();
-        var emailId = '#{userEmailId}';
-        var cookies = document.cookie.split(";");
-        var cookieValue = null;
-        for (var i = 0; i < cookies.length; i++) {
-          var cookie = jQuery.trim(cookies[i]); 
-          if (cookie.substring(0, name.length + 1) == (name + '=')) { 
-            cookieValue = decodeURIComponent(cookie.substring(name.length + 1)); 
-            break; 
-          }
-        }
-        alert(interest+emailId+cookieValue);
-        $.ajax({
-          type: 'POST',
-          contentType: 'application/json',
-          dataType: 'json',
-          data: JSON.stringify({ "candidateId": emailId,"jobId":interest }),
-          success: function() {alert("Your Interest Has Been Notified");},
-          error: function(){alert("Unable To Communicate Your Interest!");},
-          url: 'http://localhost:3000/explore',
-          cache:false
-          });
-      });   
+              input(type='hidden', name='candidateId', value='#{userEmailId}')
+              input(type='hidden', name='jobId', value='#{job.job_id}')
